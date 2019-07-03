@@ -1,0 +1,29 @@
+# SITL on custom binary (note: Please create your symbolic link to the custom arduplane binary
+# e.g. ln -s <path_to_ardupilot_codebase>/build/sitl/bin/arduplane
+# To learn how to create custom binary, see https://github.com/yonahbox/ardupilot/pull/10
+
+#Start SITL at CMAC
+./arduplane --model quadplane
+
+#Start SITL at Kompiam
+./arduplane --model quadplane --home -5.38333333,143.92250000,1577,50
+
+#Start SITL with Realflight at CMAS
+./arduplane --model flightaxis:192.168.0.101
+
+#MavP
+
+#Start MavP with SITL
+mavproxy.py --master=tcp:127.0.0.1:5760
+
+#Start MavP with playback
+mavproxy.py --master=127.0.0.1:14550
+
+#Start MavP over USB/RFD
+mavproxy.py --master=/dev/ttyUSB0
+
+#Start MavP over Air Wifi
+mavproxy.py --master=tcp:192.168.1.128:5000
+
+#Start MavP over AWS
+mavproxy.py --master=udp:localhost:5001

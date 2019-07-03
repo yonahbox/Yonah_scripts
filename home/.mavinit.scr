@@ -1,0 +1,25 @@
+module load map
+module load console
+module load horizon
+module load graph
+module load misseditor
+graph timespan 60
+
+#load pids for quad
+@alias add qpidload param load ../Params/QuadPID.param
+
+@alias add g graph
+
+#attitude graphs
+@alias add grllpid script AliasScripts/rllpid.scr
+@alias add gpitpid script AliasScripts/pitpid.scr
+@alias add gyawpid script AliasScripts/yawpid.scr
+
+#altitude graphs
+@alias add galthold script AliasScripts/althold.scr
+
+#loiter graphs
+@alias add gloiter script AliasScripts/loiterpid.scr
+
+#quad motor output graph: Common across all tuning
+@alias add gquadmotor script AliasScripts/quadmotor.scr

@@ -1,0 +1,2 @@
+# Waypoints
+This is a temporary folder to contain any waypoint files for quick use on field/in base. It is not designed to be a permanent waypoint folder; waypoints should be stored on Yonah's Google Drive.
