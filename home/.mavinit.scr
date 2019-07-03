@@ -4,22 +4,29 @@ module load horizon
 module load graph
 module load misseditor
 graph timespan 60
+graph SENSOR_OFFSETS.raw_temp
 
 #load pids for quad
 @alias add qpidload param load ../Params/QuadPID.param
 
 @alias add g graph
 
-#attitude graphs
+#qstabilize graphs
 @alias add grllpid script AliasScripts/rllpid.scr
 @alias add gpitpid script AliasScripts/pitpid.scr
 @alias add gyawpid script AliasScripts/yawpid.scr
 
-#altitude graphs
+#qhover graphs
 @alias add galthold script AliasScripts/althold.scr
 
-#loiter graphs
+#qloiter graphs
 @alias add gloiter script AliasScripts/loiterpid.scr
 
-#quad motor output graph: Common across all tuning
+#quad motor output graph: Common across all VTOL tuning
 @alias add gquadmotor script AliasScripts/quadmotor.scr
+
+#TECS tuning
+@alias add doTecs script AliasScripts/TECSSetup.scr
+
+#Check Cube Temperature
+@alias add chkCubeTemp graph SENSOR_OFFSETS.raw_temp

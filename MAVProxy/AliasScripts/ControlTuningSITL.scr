@@ -1,0 +1,6 @@
+graph NAV_CONTROLLER_OUTPUT.nav_pitch ATTITUDE.pitch*180/(22/7)
+graph NAV_CONTROLLER_OUTPUT.nav_roll ATTITUDE.roll*180/(22/7)
+graph NAV_CONTROLLER_OUTPUT.alt_error+TERRAIN_REPORT.current_height TERRAIN_REPORT.current_height
+
+graph (SERVO_OUTPUT_RAW.servo3_raw-1100)/8
+
