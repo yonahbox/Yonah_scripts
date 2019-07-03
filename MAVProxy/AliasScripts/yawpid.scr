@@ -1,0 +1,4 @@
+graph degrees(ATTITUDE.yaw)
+graph degrees(AHRS.error_yaw)
+graph ATTITUDE.yawspeed
+
