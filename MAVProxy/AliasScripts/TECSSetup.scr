@@ -1,0 +1,15 @@
+#Pitch
+graph NAV_CONTROLLER_OUTPUT.nav_pitch ATTITUDE.pitch*180/(22/7)
+
+#Throttle %
+graph (SERVO_OUTPUT_RAW.servo3_raw-1100)/8
+
+#Speed; mavlink docs says its m/s but it looks more like cm/s
+graph NAV_CONTROLLER_OUTPUT.aspd_error
+
+#Altitude
+graph NAV_CONTROLLER_OUTPUT.alt_error
+
+#Param File
+@alias add reloadTecsParams param load ../Params/TECSSetup.param
+
