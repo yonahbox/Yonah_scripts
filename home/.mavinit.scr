@@ -4,6 +4,8 @@ module load horizon
 module load graph
 module load misseditor
 graph timespan 60
+
+#raw temperature from barometer / temp Cube. Should wait for temperature to reach 60 before starting flight; Impt for sensor accuracy; Am going to launch it to force ground crew to make a habit of monitoring the temp before flying
 graph SENSOR_OFFSETS.raw_temp
 
 #load pids for quad
@@ -25,8 +27,21 @@ graph SENSOR_OFFSETS.raw_temp
 #quad motor output graph: Common across all VTOL tuning
 @alias add gquadmotor script AliasScripts/quadmotor.scr
 
-#TECS tuning
+#Make TECS tuning simpler. We will need these to go TECS
 @alias add doTecs script AliasScripts/TECSSetup.scr
 
-#Check Cube Temperature
+#raw temperature from barometer / temp Cube. Should wait for temperature to reach 60 before starting flight; Impt for sensor accuracy; an alias here in case we need to check again 
 @alias add chkCubeTemp graph SENSOR_OFFSETS.raw_temp
+
+#Vibration on aircraft
+#IMU1
+@alias add chkVibe graph RAW_IMU.xacc*9.81*0.001 RAW_IMU.yacc*9.81*0.001 RAW_IMU.zacc*9.81*0.001 gravity(RAW_IMU)
+
+#IMU2
+@alias add chkVibe2 graph SCALED_IMU2.xacc*9.81*0.001 SCALED_IMU2.yacc*9.81*0.001 SCALED_IMU2.zacc*9.81*0.001 gravity(SCALED_IMU2)
+
+#IMU3
+@alias add chkVibe3 graph SCALED_IMU3.xacc*9.81*0.001 SCALED_IMU3.yacc*9.81*0.001 SCALED_IMU3.zacc*9.81*0.001 gravity(SCALED_IMU3) 
+
+#Airspeed
+@alias add chkAspeed graph VFR_HUD.airspeed
