@@ -1,0 +1,11 @@
+#Vibration
+graph VIBRATION.vibration_x VIBRATION.vibration_y VIBRATION.vibration_z
+
+#Rangefinder health
+graph RANGEFINDER.distance
+
+#Airspeed health
+graph VFR_HUD.airspeed
+
+#RPM data
+graph RPM.rpm1
