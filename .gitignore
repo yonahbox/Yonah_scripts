@@ -9,6 +9,7 @@
 **/logs
 **/terrain
 way.txt
+LASTLOG.TXT
 
 #Other go-for-flight files that we do not need to source control
 *waypoints
@@ -16,3 +17,7 @@ way.txt
 arduplane
 *.BIN
 router_phone_numbers.txt
+
+#SSH Private Key Files
+*.pem
+YonahAWSPrivateKey-2Jul19
