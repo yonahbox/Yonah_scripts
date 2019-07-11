@@ -18,6 +18,10 @@ class remover():
         listname = sys.argv[2]
         with open (listname, "r") as reader:
             for line in reader:
+                if "#" in line: # Ignore comments
+                    continue
+                if line == "\n": # Ignore blank lines
+                    continue
                 name = (line.split())[0]
                 self.__blacklist.add(name)
     
@@ -31,8 +35,17 @@ class remover():
         with open (filename, "r") as reader: # open param file for reading
             with open ("out.param", "w") as writer: # write to output param file
                 for line in reader: 
-                    name = (line.split())[0] # Extract param name and compare with "blacklist"
-                    if not (name in self.__blacklist):
+                    if line == "\n": # Ignore empty line
+                        continue
+                    # Extract param name and compare with "blacklist"
+                    # There are two types of param files:
+                    # (1) Those that separate param + value by space
+                    # (2) And those that separate param and value by comma
+                    elif " " in line:
+                        name = (line.split())[0] # Case 1
+                    else:
+                        name = line[:line.find(",")]
+                    if not (name in self.__blacklist): # Case 2
                         writer.write(line) # Write only if param is not in "blacklist"
 
 def main():
