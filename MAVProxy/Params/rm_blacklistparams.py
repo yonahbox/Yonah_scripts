@@ -42,10 +42,10 @@ class remover():
                     # (1) Those that separate param + value by space
                     # (2) And those that separate param and value by comma
                     elif " " in line:
-                        name = (line.split())[0] # Case 1
+                        name = (line.split())[0] # Case 1. Extract param name before space
                     else:
-                        name = line[:line.find(",")]
-                    if not (name in self.__blacklist): # Case 2
+                        name = line[:line.find(",")] # Case 2. Extract param name before comma
+                    if not (name in self.__blacklist):
                         writer.write(line) # Write only if param is not in "blacklist"
 
 def main():
