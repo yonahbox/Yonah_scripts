@@ -22,7 +22,15 @@ class remover():
                     continue
                 if line == "\n": # Ignore blank lines
                     continue
-                name = (line.split())[0]
+                # Extract param from blacklist
+                # There are three types of blacklist files:
+                # (1) Those that separate param + value by space
+                # (2) Those that separate param and value by comma
+                # (3) Those with only parameter names and no values
+                if "," in line:
+                    name = line[:line.find(",")] # Case 2. Extract param name before comma
+                else:
+                    name = (line.split())[0] # Cases 1 and 3: Extract param name before space/whitespace
                 self.__blacklist.add(name)
     
     def remove(self):
@@ -35,13 +43,15 @@ class remover():
         with open (filename, "r") as reader: # open param file for reading
             with open ("out.param", "w") as writer: # write to output param file
                 for line in reader: 
+                    if "#" in line: # Ignore comments
+                        continue
                     if line == "\n": # Ignore empty line
                         continue
                     # Extract param name and compare with "blacklist"
                     # There are two types of param files:
                     # (1) Those that separate param + value by space
                     # (2) And those that separate param and value by comma
-                    elif " " in line:
+                    if " " in line:
                         name = (line.split())[0] # Case 1. Extract param name before space
                     else:
                         name = line[:line.find(",")] # Case 2. Extract param name before comma
