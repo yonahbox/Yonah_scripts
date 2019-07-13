@@ -1,5 +1,7 @@
-#Vibration
-graph VIBRATION.vibration_x VIBRATION.vibration_y VIBRATION.vibration_z
+# Check relevant vibration and sensor health, especially when performing an engine warmup
+
+#Vibration on 1st IMU (in units of g force)
+RAW_IMU.xacc*9.81*0.001 RAW_IMU.yacc*9.81*0.001 RAW_IMU.zacc*9.81*0.001 gravity(RAW_IMU)
 
 #Rangefinder health
 graph RANGEFINDER.distance

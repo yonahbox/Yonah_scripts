@@ -21,6 +21,7 @@ These are complicated commands used for starting MAVProxy/SITL, abstracted into 
 **Running SITL on custom binary:**
 
 * **run_quadplane_CMAC.sh**: Start quadplane SITL in CMAC
+* **run_quadplane_Padi.sh**: Start quadplane SITL at Padi Field near Homestay Anjung Sawah
 * **run_quadplane_Kompiam.sh**: Start quadplane SITL in Kompiam
 * **run_quadplaneRF8_CMAC.sh**: Start quadplane SITL with Realflight8 in CMAC
 
@@ -31,10 +32,11 @@ To learn how to create custom binary, see the following [link](https://github.co
 **Launching MAVProxy:**
 
 * **start_mavproxy_airwifi.sh**: Start MAVProxy over Air Wifi
+* **start_mavproxy_airwifi2.sh**: Start MAVProxy over secondary Air Wifi (Telem 2)
 * **start_mavproxy_AWS.sh**: Start MAVProxy over AWS instance
 * **start_mavproxy_Nemo.sh**: Start MAVProxy over RFD connection
 * **start_mavproxy_playback.sh**: Start MAVProxy over MAVPlayback
-* **start_mavproxy_sitl.sh***: Start MAVProxy over custom SITL binary (see above)
+* **start_mavproxy_sitl.sh**: Start MAVProxy over custom SITL binary (see above)
 * **start_mavproxy_USB.sh**: Start MAVProxy over USB connection
 
 **Misc**
