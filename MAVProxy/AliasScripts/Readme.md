@@ -16,3 +16,4 @@ Scripts for launching graphs/other functions in MAVProxy. They are called in .ma
 * AddRngFnd.scr
 * AutoTuneCheck.scr
 * ServoCheckMovement.scr
+* engine_warmup.scr

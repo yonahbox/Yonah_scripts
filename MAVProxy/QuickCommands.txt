@@ -5,10 +5,13 @@
 #Start SITL at CMAC
 ./arduplane --model quadplane
 
+#Start SITL at Padi field near Homestay Anjung Sawah
+./arduplane --model quadplane --home 2.231391,102.685764,227,0
+
 #Start SITL at Kompiam
 ./arduplane --model quadplane --home -5.38333333,143.92250000,1577,50
 
-#Start SITL with Realflight at CMAS
+#Start SITL with Realflight at CMAC
 ./arduplane --model flightaxis:192.168.0.101
 
 #MavP
@@ -24,6 +27,9 @@ mavproxy.py --master=/dev/ttyUSB0
 
 #Start MavP over Air Wifi
 mavproxy.py --master=tcp:192.168.1.128:5000
+
+#Start MAVProxy over secondary Air Wifi (Telem 2)
+mavproxy.py --master=tcp:192.168.1.129:5002
 
 #Start MavP over AWS
 mavproxy.py --master=udp:localhost:5001

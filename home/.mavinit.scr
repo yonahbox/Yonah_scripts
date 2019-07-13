@@ -1,8 +1,8 @@
+mode moddebug 3
 module load map
 module load console
 module load horizon
 module load graph
-module load misseditor
 graph timespan 60
 
 #raw temperature from barometer / temp Cube. Should wait for temperature to reach 60 before starting flight; Impt for sensor accuracy; Am going to launch it to force ground crew to make a habit of monitoring the temp before flying
@@ -29,6 +29,9 @@ graph SENSOR_OFFSETS.raw_temp
 
 #Make TECS tuning simpler. We will need these to go TECS
 @alias add doTecs script AliasScripts/TECSSetup.scr
+
+#Check vibration and sensor health during an engine warmup test
+@alias add enginewarmup script AliasScripts/engine_warmup.scr
 
 #raw temperature from barometer / temp Cube. Should wait for temperature to reach 60 before starting flight; Impt for sensor accuracy; an alias here in case we need to check again 
 @alias add chkCubeTemp graph SENSOR_OFFSETS.raw_temp
