@@ -1,4 +1,1 @@
 graph degrees(ATTITUDE.roll) NAV_CONTROLLER_OUTPUT.nav_roll
-graph ATTITUDE.rollspeed
-
-
