@@ -1,4 +1,1 @@
 graph degrees(ATTITUDE.pitch) NAV_CONTROLLER_OUTPUT.nav_pitch
-graph ATTITUDE.pitchspeed
-
-
