@@ -3,7 +3,26 @@
  <graph name='VTOLTuning/Loiter'>
  <description>Horizontal Actual Velocities, used for loiter tuning.</description>
  <expression>GLOBAL_POSITION_INT.vx GLOBAL_POSITION_INT.vy</expression>
- <expression>QTUN.DVx NKF1.VN QTUN.DVy NKF1.VE</expression>
+ </graph>
+
+ <graph name='VTOLTuning/LoiterVx'>
+ <description>Horizontal Actual Velocities, used for loiter tuning.</description>
+ <expression>PSC.TVX PSC.VX</expression>
+ </graph>
+
+ <graph name='VTOLTuning/LoiterVy'>
+ <description>Horizontal Actual Velocities, used for loiter tuning.</description>
+ <expression>PSC.TVY PSC.VY</expression>
+ </graph>
+
+ <graph name='VTOLTuning/LoiterPx'>
+ <description>Horizontal Actual Velocities, used for loiter tuning.</description>
+ <expression>PSC.TPX PSC.PX</expression>
+ </graph>
+
+ <graph name='VTOLTuning/LoiterPy'>
+ <description>Horizontal Actual Velocities, used for loiter tuning.</description>
+ <expression>PSC.TPY PSC.PY</expression>
  </graph>
 
  <graph name='VTOLTuning/QuadMotors'>
