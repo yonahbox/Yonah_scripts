@@ -28,6 +28,9 @@ class sms_receive():
 
                 subprocess.call(["ssh", "root@192.168.1.1", "gsmctl -S -d 1"], shell=False) # Delete message in RUT
 
+            except (IndexError):
+                print ("I received a junk message")
+            
             except (KeyboardInterrupt, SystemExit):
                 print ("Shutting down")
                 break
