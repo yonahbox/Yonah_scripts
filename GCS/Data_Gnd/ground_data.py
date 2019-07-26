@@ -87,7 +87,7 @@ try:
 		if ssh.ssh_test_connection() == False:
 			ssh.ssh_attempt_connection()
 
-		time.sleep(0.2)
+		time.sleep(1)
 
 except KeyboardInterrupt:
 	ssh.ssh_terminate()
