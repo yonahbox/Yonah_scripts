@@ -1,11 +1,13 @@
-# MAVProxy
+# GCS
 
-Main folder where MAVProxy will be run during flight tests/SITL testing
+Main folder where all GCS tools are used during flight tests/SITL testing (e.g. MAVProxy, AWS Data, and SMS Telemetry)
 Note that all these instructions are for Ubuntu 16.04
 
 ## List of files and folders:
 
 * **Alias Scripts**: Scripts for launching graphs/other modules in MAVProxy
+* **SMS_Gnd**: SMS Telemetry Scripts to be run on the GCS
+* **Data_Gnd**: AWS Data Telemetry Scripts to be run on the GCS
 
 The following are temporary holding folders for: Dataflash logs, Parameters, Telemetry Logs, and Waypoint files respectively. They are designed to allow quick access during flight testing
 
