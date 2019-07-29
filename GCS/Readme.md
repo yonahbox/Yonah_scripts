@@ -39,7 +39,6 @@ To learn how to create custom binary, see the following [link](https://github.co
 * **start_mavproxy_Nemo.sh**: Start MAVProxy over RFD connection
 * **start_mavproxy_playback.sh**: Start MAVProxy over MAVPlayback
 * **start_mavproxy_sitl.sh**: Start MAVProxy over custom SITL binary (see above)
-* **start_mavproxy_USB.sh**: Start MAVProxy over USB connection
 
 **Misc**
 
