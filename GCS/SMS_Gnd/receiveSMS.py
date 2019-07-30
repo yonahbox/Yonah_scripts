@@ -7,6 +7,7 @@ Lau Yan Han and Yonah, July 2019
 '''
 
 import subprocess
+import datetime
 
 class sms_receive():
 
@@ -24,6 +25,7 @@ class sms_receive():
                     continue
 
                 self.msg = (received.splitlines()[4]).split(' ',1)[1] #Extract message (5th line, excluding 1st word)
+                print(datetime.datetime.now())
                 print(self.msg)
 
                 subprocess.call(["ssh", "root@192.168.1.1", "gsmctl -S -d 1"], shell=False) # Delete message in RUT
