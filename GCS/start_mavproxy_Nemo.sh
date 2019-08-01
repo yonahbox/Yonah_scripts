@@ -1,2 +1,2 @@
 # Start MAVProxy over RFD
-sudo mavproxy.py --master=/dev/ttyUSB0
+mavproxy.py --master=/dev/ttyUSB0
