@@ -22,8 +22,11 @@ class sms_send():
         - Arm the aircraft: "arm"
         - Disarm the aircraft: "disarm"
         - Mode change: "mode <flight mode in lowercase letters>"
-        - Activate SMS sending from aircraft: "sms true"
-        - Deactivate SMS sending from aircraft: "sms false"
+        - Activate regular SMS sending from aircraft (defaults to one SMS every 5 mins): "sms true"
+        - Deactivate regular SMS sending from aircraft: "sms false"
+        - Request for one SMS from the aircraft (useful for testing link status): "ping"
+        - Request regular SMS sending in short intervals (once every 10 sec): "sms short"
+        - Request regular SMS sending in long intervals (once every 5 mins): "sms long"
         Commands are not case sensitive
         """
         print (helpmsg)
