@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 '''
 Simple script to send SMS messages to aircraft from a terminal command.
-To run this script, please specify the Ground Router phone number
+To run this script, please specify the aircraft phone number
 
 Lau Yan Han and Yonah, July 2019
 '''
