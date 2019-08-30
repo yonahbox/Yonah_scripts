@@ -23,7 +23,7 @@ source /opt/ros/kinetic/setup.bash
 # so as to to overlay the next ROS node over the previous one
 # Failing to do so will result in some of the packages not being detected by ROS 
 
-git clone https://github.com/yonahbox/Yonah_ROS_packages.git
+git clone https://github.com/yonahbox/Yonah_ROS_packages.git ~/Yonah_ROS_packages
 
 # air_data
 bash 02_addROSpackages.sh bonedata_ws air_data
@@ -43,4 +43,10 @@ bash 03_removepackages.sh
 
 ##########################################
 
-echo "Setup complete, please reload the bashrc using source ~/.bashrc"
+echo "
+Setup complete, please do the following:
+
+1. Reload the bashrc using source ~/.bashrc
+2. Add a whitelist.txt into ~/Yonah_ROS_Packages/bonesms_ws/src/air_sms/src/
+3. Add the AWS Private Keys into ~/Yonah_ROS_Packages/bonedata_ws/src/air_data/src/
+"

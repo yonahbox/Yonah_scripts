@@ -22,4 +22,8 @@ Steps 2 - 4 can be automated using scripts in this folder
 * Afterwards, use the scripts in this folder to automate the rest of the setup process. Download the Bonesetup folder, copy it into the Bone's root folder (using `scp` command), and run the 00_Bonesetup script with `bash 00_Bonesetup.sh`
     * Note: Make sure all the scripts in this folder are copied to the same location in the Beaglebone (e.g. all located in the Bone's root folder)
 * Respond "Yes" or enter password whenever the system prompts you to do so
-* After the script is complete, reload the .bashrc with `source ~/.bashrc` so that the ROS packages can be recognised
+* After the script is complete, carry out the following:
+    * Reload the .bashrc with `source ~/.bashrc` so that the ROS packages can be recognised
+    * Add a whitelist file (with the title `whitelist.txt`) into `~/Yonah_ROS_Packages/bonesms_ws/src/air_sms/src/` location in the Beaglebone, so that air_sms can use it to recognise whitelisted phone numbers
+    * Add the AWS Private Keys into `~/Yonah_ROS_Packages/bonedata_ws/src/air_data/src/` location in the Beaglebone, so that air_data can use it to connect to the AWS instance
+* Note that all of Yonah's ROS packages will be located in the `~/Yonah_ROS_Packages` folder
