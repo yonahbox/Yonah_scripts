@@ -4,3 +4,4 @@ This is a temporary folder to contain any dataflash logs for quick analysis on f
 ## List of files
 * dronekit-la.config: Custom config file for [Dronekit Log Analyzer](https://github.com/dronekit/dronekit-la)
 * mavgraphs.xml: Custom graph config file when running MAVExplorer
+* .ini files: Graph config files when running APMPlanner2

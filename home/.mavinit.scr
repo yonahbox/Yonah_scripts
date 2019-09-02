@@ -3,6 +3,7 @@ module load map
 module load console
 module load horizon
 module load graph
+set shownoise false
 graph timespan 60
 
 #raw temperature from barometer / temp Cube. Should wait for temperature to reach 60 before starting flight; Impt for sensor accuracy; Am going to launch it to force ground crew to make a habit of monitoring the temp before flying
@@ -48,3 +49,9 @@ graph SENSOR_OFFSETS.raw_temp
 
 #Airspeed
 @alias add chkAspeed graph VFR_HUD.airspeed
+
+#Rangefinder
+@alias add chkLidar graph RANGEFINDER.distance
+
+#Engine control checks during an AUTO mission
+@alias add engineautocheck script AliasScripts/engine_auto_start.scr
