@@ -13,16 +13,21 @@ elif [ ! -d "$HOME/Yonah_ROS_packages/$1" ]; then
 elif [ ! -d "$HOME/Yonah_ROS_packages/$1/src/$2" ]; then
     echo "$HOME/Yonah_ROS_packages/$1/src/$2 directory not found, exiting!"
 else
+    # Compile the workspace with cmake, add it to bashrc, and then prepare for catkin_create_pkg
     cd ~/Yonah_ROS_packages/$1
     catkin_make
     echo "source ~/Yonah_ROS_packages/$1/devel/setup.bash" >> ~/.bashrc
     cd src
-    # Note that the below set of commands (moving air_data folder) are a "hack" to get past the "file exists" error
-    # when running catkin_create_pkg. It's a very ugly method, but it works...
+    # Note that the below set of commands are a "hack" to get past the "file exists" error
+    # when running catkin_create_pkg. The idea is to move the package folder temporarily to
+    # the root location, run catkin_create_pkg to generate the package, and then shift the
+    # contents of the original package folder into the newly generated package. Finally, the 
+    # original package folder is deleted. It's a very ugly method, but it works...
     mv $2 ~/
     catkin_create_pkg $2 std_msgs rospy
     mv ~/$2/* ./$2/
     rm -r ~/$2
+    # Finally, re-compile the workspace with the newly generated package
     cd ~/Yonah_ROS_packages/$1
     catkin_make
 fi

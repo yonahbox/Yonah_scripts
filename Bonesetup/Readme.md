@@ -27,3 +27,21 @@ Steps 2 - 4 can be automated using scripts in this folder
     * Add a whitelist file (with the title `whitelist.txt`) into `~/Yonah_ROS_Packages/bonesms_ws/src/air_sms/src/` location in the Beaglebone, so that air_sms can use it to recognise whitelisted phone numbers. Refer to the air_sms [Readme](https://github.com/yonahbox/Yonah_ROS_packages/tree/master/bonesms_ws) on instructions on how to setup `whitelist.txt`
     * Add the AWS Private Keys into `~/Yonah_ROS_Packages/bonedata_ws/src/air_data/src/` location in the Beaglebone, so that air_data can use it to connect to the AWS instance
 * Note that all of Yonah's ROS packages will be located in the `~/Yonah_ROS_Packages` folder
+
+## Re-setup procedures
+
+If for any reason you need to re-run any of the scripts (e.g. re-download Yonah's ROS packages), go into `00_Bonesetup.sh` and comment out the unncessary parts. For example, to re-download and re-compile Yonah's ROS packages, go into `00_Bonesetup.sh`, and comment out everything except the following block of code:
+
+```
+git clone https://github.com/yonahbox/Yonah_ROS_packages.git ~/Yonah_ROS_packages
+
+# air_data
+bash 02_addROSpackages.sh bonedata_ws air_data
+source ~/Yonah_ROS_packages/bonedata_ws/devel/setup.bash
+
+# air_sms
+bash 02_addROSpackages.sh bonesms_ws air_sms
+source ~/Yonah_ROS_packages/bonesms_ws/devel/setup.bash
+```
+
+Then remove any relevant lines from your `.bashrc` (e.g. `source ~/Yonah_ROS_packages/bonedata_ws/devel/setup.bash`), reload the `.bashrc`, and then rerun `00_Bonesetup.sh`
