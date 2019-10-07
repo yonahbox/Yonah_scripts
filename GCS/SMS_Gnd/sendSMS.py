@@ -27,6 +27,8 @@ class sms_send():
         - Request for one SMS from the aircraft (useful for testing link status): "ping"
         - Request regular SMS sending in short intervals (once every 10 sec): "sms short"
         - Request regular SMS sending in long intervals (once every 5 mins): "sms long"
+        - Set a specific waypoint number in an already-loaded mission file: "wp set <wp number>"
+        - Load a waypoint file that is stored in the companion computer: "wp load <absolute path to waypoint file>"
         Commands are not case sensitive
         """
         print (helpmsg)
