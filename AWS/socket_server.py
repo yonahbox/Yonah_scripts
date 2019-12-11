@@ -1,18 +1,15 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2.7
 
 import time
 import socket
 import multiprocessing
 import subprocess
+import sys
 
-class AWS:
-
+class aircraft:
+	
 	def __init__(self):		
-
-		self.s_air = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-		self.s_air.bind(('localhost', 4000))
-		self.s_ground = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-		self.s_ground.bind(('localhost', 4001))		
+	
 		self.air_conn = ''
 		self.air_addr = ''
 		self.ground_conn = ''
@@ -21,9 +18,18 @@ class AWS:
 		self.ground_ack = multiprocessing.Queue()
 		self.status = []
 
+	def aircraft_name(self, name):
+		self.name = name
+
+	def socket_init(self, a, b):
+		self.s_air = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+		self.s_air.bind(('localhost', a))
+		self.s_ground = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+		self.s_ground.bind(('localhost', b))	
+
 	def air_sock_ping(self):
 		
-		self.s_air.listen(1)		
+		self.s_air.listen(1)	
 		self.air_conn, self.air_addr = self.s_air.accept()
 		self.air_ack.put(self.air_conn.recv(4096))
 		self.air_conn.send(str(self.status))
@@ -39,58 +45,78 @@ class AWS:
 
 		self.air_ack = multiprocessing.Queue()
 		self.ground_ack = multiprocessing.Queue()
-	
+
 		self.processes = [multiprocessing.Process(target=self.air_sock_ping), multiprocessing.Process(target=self.ground_sock_ping)]
 
-		
 		for p in self.processes:
 			p.start()
 
 		for p in self.processes:
 			p.join(1)
-		
+
 		for p in self.processes:
 			p.terminate()	
 
 		self.status = []
-			
+
 		try:		
 			self.status.append(self.air_ack.get(timeout=0.1))			
 		except:
 			self.status.append('')
 			
-		
 		try:		
-		 	self.status.append(self.ground_ack.get(timeout=0.1)) 		
+			self.status.append(self.ground_ack.get(timeout=0.1)) 		
 		except:
-			self.status.append('')
+			self.status.append('')		
 
-		if ("AIR" in self.status) and (("GROUND" in self.status) or ("GROUNDNETCAT" in self.status)):	
-			print "Air-Server-Ground Established"
-		
-		elif ("AIR" in self.status) and not (("GROUND" in self.status) or ("GROUNDNETCAT" in self.status)):
-			print "Air-Server Established, Server-Ground Connection Down, Please Reconnect"				
 
-		elif not ("AIR" in self.status) and (("GROUND" in self.status) or ("GROUNDNETCAT" in self.status)):
-			print "Server-Ground Established, Air-Server Connection Down, Please Reconnect"	
+def log_status(live_aircraft, aircraft_status):
 
+	for a in live_aircraft:
+
+		if ("AIR" in a.status) and (("GROUND" in a.status) or ("GROUNDNETCAT" in a.status)):	
+			aircraft_status.append([a.name, "A---S---G"])
+		elif ("AIR" in a.status) and not (("GROUND" in a.status) or ("GROUNDNETCAT" in a.status)):
+			aircraft_status.append([a.name, "A---S-x-G"])			
+		elif not ("AIR" in a.status) and (("GROUND" in a.status) or ("GROUNDNETCAT" in a.status)):
+			aircraft_status.append([a.name, "A-x-S---G"])
 		else:
-			print "SSH Connection Lost"
+			aircraft_status.append([a.name, "A-x-S-x-G"])
 
-	def socket_terminate(self):
-		self.s_air.shutdown()
-		self.s_air.close()
-		self.s_ground.shutdown()
-		self.s_ground.close()
+	print (aircraft_status)
 
+	log_file = open("DL_log.txt", "a")
+	log_file.write("["+str(time.asctime(time.localtime()))+"] ")
+	for s in aircraft_status:
+		log_file.write("NEMO"+str(s[0])+": "+str(s[1])+", ")
+	log_file.write("\n")
+	log_file.close()
 
-aws = AWS()
+live_aircraft = []
 
-try:
-	while True:
-		aws.per_second()
-		time.sleep(5)
+for arg in sys.argv[1:]:
+	a = aircraft()
+	a.aircraft_name(arg)
+	a.socket_init(4000+(10*int(arg)), 4001+(10*int(arg)))
+	live_aircraft.append(a)
+
+while True:
 	
-except KeyboardInterrupt:
-	print "Terminating Connection..."
-	aws.socket_terminate()
+	aircraft_processes = []
+	aircraft_status = []
+	
+	for a in live_aircraft:
+		aircraft_processes.append(multiprocessing.Process(target=a.per_second()))
+
+	for a in aircraft_processes:
+		a.start()
+	
+	for a in aircraft_processes:
+		a.join(2)
+
+	for a in aircraft_processes:
+		a.terminate()
+	
+	log_status(live_aircraft, aircraft_status)
+	
+

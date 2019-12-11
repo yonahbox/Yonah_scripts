@@ -15,6 +15,7 @@ import time
 import socket
 import subprocess
 from subprocess import PIPE
+import sys
 
 #Defines the SSH Class that handles the network connection between the ground control station and the remote web server
 class SSH:
@@ -33,10 +34,14 @@ class SSH:
 	#Attempts one SSH connection. Waits for 5 seconds before any tests to allow OpenSSH to thoroughly finish the connection process
 	def ssh_attempt_connection(self):	
 		
-		print "Attempting connection...\r\n"
+		print "Attempting connection...\r\n"	
+
+		port_1 = (10 * int(sys.argv[1])) + 4000
+		port_2 = port_1 + 1
+		port_3 = port_1 + 2
 
 		#Usage of python subprocessing to maintain an open SSH connection
-		self.ssh_linkage = subprocess.Popen(['bash $(find -name *ground_ssh_connection.sh)'], shell=True, stdout=PIPE, stderr=PIPE)
+		self.ssh_linkage = subprocess.Popen(['bash $(find -name *ground_ssh_connection.sh) '+str(port_1)+' '+str(port_2)+' '+str(port_3)], shell=True, stdout=PIPE, stderr=PIPE)
 		
 		time.sleep(5)	
 
@@ -102,6 +107,9 @@ if __name__ == "__main__":
 
 	#Creates an instance of SSH
 	ssh = SSH()
+
+	#Launches mavProxy
+	subprocess.Popen(['mavproxy.py', '--master=udp:localhost:5001'], stdout=PIPE, stderr=PIPE)
 
 	try:
 		#Loops to ensure that the connection is established, otherwise, the program will continue to attempt connections with the web server until successful
