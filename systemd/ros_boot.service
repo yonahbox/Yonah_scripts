@@ -1,5 +1,5 @@
 [Unit]
-Descrption=Start a new tmux session and run roslaunch to simplyify NEMO startup
+Description=Start a new tmux session and run roslaunch to simplyify NEMO startup
 After=network-online.target
 Requires=network-online.target
 
