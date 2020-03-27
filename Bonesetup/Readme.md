@@ -8,8 +8,9 @@ There are four main tasks to be performed during the initial setup (minus the ha
 2. Installing ROS, MAVROS and other neccessary packages
 3. Adding ROS packages from [Yonah_ROS_Packages](https://github.com/yonahbox/Yonah_ROS_packages.git)
 4. Removing unnecessary packages
+5. configure the systemd service to automate the starting of the required roslaunch files on boot
 
-Steps 2 - 4 can be automated using scripts in this folder
+Steps 2 - 5 can be automated using scripts in this folder
 
 ## Bone setup procedure
 
@@ -19,8 +20,14 @@ Steps 2 - 4 can be automated using scripts in this folder
 * Make sure the Bone is connected to the Internet (through a LAN cable connected to a router) before installing packages
 * Follow the steps in the guide up to and including the part where you add "restricted" to sources.list (i.e. `sudo vi /etc/apt/sources.list` followed by `deb http://ports.ubuntu.com/ubuntu-ports/ xenial main restricted universe multiverse`, etc)
     * Note: There is no need to do the memory re-partitioning step mentioned in the guide
-* Afterwards, use the scripts in this folder to automate the rest of the setup process. Download the Bonesetup folder, copy it into the Bone's root folder (using `scp` command), and run the 00_Bonesetup script with `bash 00_Bonesetup.sh`
-    * Note: Make sure all the scripts in this folder are copied to the same location in the Beaglebone (e.g. all located in the Bone's root folder)
+<!-- * Afterwards, use the scripts in this folder to automate the rest of the setup process. Download the Bonesetup folder, copy it into the Bone's root folder (using `scp` command), and run the 00_Bonesetup script with `bash 00_Bonesetup.sh` -->
+<!-- * Note: Make sure all the scripts in this folder are copied to the same location in the Beaglebone (e.g. all located in the Bone's root folder) -->
+* clone this repo onto the bone and run the bonesetup scripts
+    ```
+    git clone https://github.com/yonahbox/Yonah_scripts.git
+    cd Yonah_scripts/Bonesetup
+    bash 00_Bonesetup.sh
+    ```
 * Respond "Yes" or enter password whenever the system prompts you to do so
 * After the script is complete, carry out the following:
     * Reload the .bashrc with `source ~/.bashrc` so that the ROS packages can be recognised

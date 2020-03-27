@@ -43,10 +43,17 @@ bash 03_removepackages.sh
 
 ##########################################
 
+#Step 4: setup the systemd service
+
+bash 04_systemd_setup.sh
+
+##########################################
+
 echo "
 Setup complete, please do the following:
 
 1. Reload the bashrc using source ~/.bashrc
 2. Add a whitelist.txt into ~/Yonah_ROS_Packages/bonesms_ws/src/air_sms/src/
 3. Add the AWS Private Keys into ~/Yonah_ROS_Packages/bonedata_ws/src/air_data/src/
+4. If systemd service should be enabled, run sudo systemctl enabled ros_boot.service
 "
