@@ -108,8 +108,8 @@ if __name__ == "__main__":
 	#Creates an instance of SSH
 	ssh = SSH()
 
-	#Launches mavProxy
-	subprocess.Popen(['mavproxy.py', '--master=udp:localhost:5001'], stdout=PIPE, stderr=PIPE)
+	#Launches mavProxy. To-do: This feature currently is broken as we can't input commands into MavP
+	#subprocess.Popen(['mavproxy.py', '--master=udp:localhost:5001'], stdout=PIPE, stderr=PIPE)
 
 	try:
 		#Loops to ensure that the connection is established, otherwise, the program will continue to attempt connections with the web server until successful
