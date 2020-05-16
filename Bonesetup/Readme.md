@@ -33,6 +33,8 @@ Steps 2 - 5 can be automated using scripts in this folder
     * Reload the .bashrc with `source ~/.bashrc` so that the ROS packages can be recognised
     * Add a whitelist file (with the title `whitelist.txt`) into `~/Yonah_ROS_Packages/bonesms_ws/src/air_sms/src/` location in the Beaglebone, so that air_sms can use it to recognise whitelisted phone numbers. Refer to the air_sms [Readme](https://github.com/yonahbox/Yonah_ROS_packages/tree/master/bonesms_ws) on instructions on how to setup `whitelist.txt`
     * Add the AWS Private Keys into `~/Yonah_ROS_Packages/bonedata_ws/src/air_data/src/` location in the Beaglebone, so that air_data can use it to connect to the AWS instance
+    * If systemd service should be enabled, run `sudo systemctl enabled ros_boot.service`
+    * Change the default password of the Bone's account
 * Note that all of Yonah's ROS packages will be located in the `~/Yonah_ROS_Packages` folder
 
 ## Re-setup procedures
