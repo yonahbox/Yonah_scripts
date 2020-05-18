@@ -49,6 +49,13 @@ bash 04_systemd_setup.sh
 
 ##########################################
 
+#Step 5: Build telegram
+
+bash 05_telegram_build.sh
+./telegram/tele_auth
+
+##########################################
+
 echo "
 Setup complete, please do the following:
 

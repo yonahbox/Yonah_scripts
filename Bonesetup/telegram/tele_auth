@@ -1,0 +1,72 @@
+#!/usr/bin/env python3
+
+## to be run as part of Yonah_Scripts bonesetup
+
+import os
+
+from Td import Td
+
+if __name__ == '__main__':
+	if os.path.isdir('~/.tdlib'):
+		print('An instance of telegram already exists in this directory')
+		print('Please delete that instance if you wish to create a new one')
+		print('exiting...')
+		exit()
+	
+	td = Td('.tdlib', "", "")
+	td.send({'@type': 'getAuthorizationState'})
+	while True:
+		event = td.receive()
+		if event:
+			if event['@type'] == 'updateAuthorizationState':
+				auth_state = event['authorization_state']['@type']
+
+				if auth_state == 'authorizationStateClosed':
+					break
+
+				if auth_state == 'authorizationStateWaitTdlibParameters':
+					td.send({
+						'@type': 'setTdlibParameters',
+						'parameters': {
+							'database_directory': '.tdlib',
+							'use_message_database': True,
+							'use_secret_chats': True,
+							'api_id': 1111226,
+							'api_hash': '9996b83ac27902d79ce9486e6f740a08',
+							'system_language_code': 'en',
+							'device_model': 'Desktop',
+							'system_version': 'Linux',
+							'application_version': '1.0',
+							'enable_storage_optimizer': True
+						}
+					})
+
+				if auth_state == 'authorizationStateWaitEncryptionKey':
+					td.send({
+						'@type': 'checkDatabaseEncryptionKey', 
+						'key': 'my_key'
+					})
+
+				if auth_state == 'authorizationStateWaitPhoneNumber':
+					phone_number = input('Please enter your phone number: ')
+					td.send({
+						'@type': 'setAuthenticationPhoneNumber', 
+						'phone_number': phone_number
+					})
+
+				if auth_state == 'authorizationStateWaitCode':
+					code = input('Please enter the authentication code you received: ')
+					td.send({
+						'@type': 'checkAuthenticationCode', 
+						'code': code
+					})
+
+				if auth_state == 'authorizationStateWaitPassword':
+					password = input('Please enter your password')
+					td.send({
+						'@type': 'checkAuthenticationPassword', 
+						'password': password
+					})
+				if auth_state == 'authorizationStateReady':
+					print('telegram client setup complete')
+					exit()
