@@ -37,7 +37,7 @@ params = {}
 for key in form.keys():
     params[key] = form[key].value
 # "data" field is hex encoded
-params["data"] = binascii.unhexlify(params["data"]).decode()
+params["data"] = binascii.unhexlify(params["data"])
 
 # Write MO msg to text file. File can only hold 1 msg at a time...
 # Pre-req: Make sure apache server has read-write permissions to the file and its folder
