@@ -11,6 +11,7 @@ cd ~
 mkdir repo
 cd repo
 git clone https://github.com/tdlib/td.git
+cd td
 git checkout v1.6.0
 
 # Build Telegram
