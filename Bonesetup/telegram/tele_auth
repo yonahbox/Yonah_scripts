@@ -48,7 +48,7 @@ if __name__ == '__main__':
 					})
 
 				if auth_state == 'authorizationStateWaitPhoneNumber':
-					phone_number = input('Please enter your phone number: ')
+                                    phone_number = input('Please enter your phone number (with country code, eg: +6512345678): ')
 					td.send({
 						'@type': 'setAuthenticationPhoneNumber', 
 						'phone_number': phone_number
