@@ -5,15 +5,23 @@
 import os
 
 from Td import Td
+from pathlib import Path
+
+# tdlib_dir = str()
+home_dir = Path.home()
+tdlib_dir = str(home_dir) + '/.tdlib'
+
+# tdlib_dir = "~/test/.tdlib"
+
 
 if __name__ == '__main__':
-	if os.path.isdir('~/.tdlib'):
+	if os.path.isdir(tdlib_dir):
 		print('An instance of telegram already exists in this directory')
 		print('Please delete that instance if you wish to create a new one')
 		print('exiting...')
 		exit()
 	
-	td = Td('.tdlib', "", "")
+	td = Td(tdlib_dir, "", "")
 	td.send({'@type': 'getAuthorizationState'})
 	while True:
 		event = td.receive()
@@ -28,7 +36,7 @@ if __name__ == '__main__':
 					td.send({
 						'@type': 'setTdlibParameters',
 						'parameters': {
-							'database_directory': '.tdlib',
+							'database_directory': tdlib_dir,
 							'use_message_database': True,
 							'use_secret_chats': True,
 							'api_id': 1111226,
@@ -48,7 +56,7 @@ if __name__ == '__main__':
 					})
 
 				if auth_state == 'authorizationStateWaitPhoneNumber':
-                                    phone_number = input('Please enter your phone number (with country code, eg: +6512345678): ')
+					phone_number = input('Please enter your phone number (with country code, eg: +6512345678): ')
 					td.send({
 						'@type': 'setAuthenticationPhoneNumber', 
 						'phone_number': phone_number
