@@ -34,12 +34,14 @@ print ("OK")
 # In the final implementation, should have some form of security checks (e.g. check for whitelisted serial/imei)
 rock7_whitelist = {"109.74.196.135", "212.71.235.32"}
 try:
+    # Get client IP address. See https://stackoverflow.com/questions/7033953/python-cgi-program-wants-to-know-the-ip-address-of-the-calling-web-page
     ip = cgi.escape(os.environ["REMOTE_ADDR"])
 except:
     ip = "127.0.0.1"
 
-# Ignore incoming msgs without data feld (e.g. blank SBD msgs)
+# Only Rock 7 IPs can access this script
 if ip in rock7_whitelist:
+    # Ignore incoming msgs without data feld (e.g. blank SBD msgs)
     if "data" in form.keys():
         # Transfer FieldStorage to a dictionary (for easier manipulation)
         params = {}
