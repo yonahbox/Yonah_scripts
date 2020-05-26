@@ -23,6 +23,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import binascii
 import cgi, cgitb
+import os
 
 form = cgi.FieldStorage()
 
@@ -31,15 +32,22 @@ print ("Content-Type:text/html\n\n")
 print ("OK")
 
 # In the final implementation, should have some form of security checks (e.g. check for whitelisted serial/imei)
+rock7_whitelist = {"109.74.196.135", "212.71.235.32"}
+try:
+    ip = cgi.escape(os.environ["REMOTE_ADDR"])
+except:
+    ip = "127.0.0.1"
 
-# Transfer FieldStorage to a dictionary (for easier manipulation)
-params = {}
-for key in form.keys():
-    params[key] = form[key].value
-
-# Write MO msg to text file. File can only hold 1 msg at a time...
-# Pre-req: Make sure apache server has read-write permissions to the file and its folder
-# See https://www.simplified.guide/apache/change-user-and-group
-# and https://stackoverflow.com/questions/33622113/python-cgi-script-permission-denied-when-writing-file
-with open("/satcomms_server/buffer.txt", 'w+') as fp:
-    fp.write(str(params) + "\n")
+# Ignore incoming msgs without data feld (e.g. blank SBD msgs)
+if ip in rock7_whitelist:
+    if "data" in form.keys():
+        # Transfer FieldStorage to a dictionary (for easier manipulation)
+        params = {}
+        for key in form.keys():
+            params[key] = form[key].value
+        # Write MO msg to text file. File can only hold 1 msg at a time...
+        # Pre-req: Make sure apache server has read-write permissions to the file and its folder
+        # See https://www.simplified.guide/apache/change-user-and-group
+        # and https://stackoverflow.com/questions/33622113/python-cgi-script-permission-denied-when-writing-file
+        with open("/satcomms_server/buffer.txt", 'w+') as fp:
+            fp.write(str(params) + "\n")
