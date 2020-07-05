@@ -35,7 +35,8 @@ print ("OK")
 rock7_whitelist = {"109.74.196.135", "212.71.235.32"}
 try:
     # Get client IP address. See https://stackoverflow.com/questions/7033953/python-cgi-program-wants-to-know-the-ip-address-of-the-calling-web-page
-    ip = cgi.escape(os.environ["REMOTE_ADDR"])
+    # Update: The above link fails for Python3.8 and Ubuntu 20.04; see this instead: https://www.tutorialspoint.com/cgi-environment-variables-in-python
+    ip = os.environ["REMOTE_ADDR"]
 except:
     ip = "127.0.0.1"
 
