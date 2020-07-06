@@ -75,19 +75,22 @@ class SSH:
 			#Send the Ground NETCAT Status
 			self.from_server = self.client.recv(4096)
 			self.client.close()
+
+			cur_time = "[" + str(time.time()) + "]"
 	
 			if ("GROUND".encode() in self.from_server) and ("AIR".encode() in self.from_server):	
-				print ("Air-Server-Ground Established\r")
+				print (cur_time + " Air-Server-Ground Established\r")
 				self.air_link = True
 				self.ground_link = True	
 			elif ("GROUND".encode() in self.from_server) and not ("AIR".encode() in self.from_server):
-				print ("Server-Ground Established, Air-Server Connection Down, Please Reconnect\r")
+				print (cur_time + " Server-Ground Established, Air-Server Connection Down, Please Reconnect\r")
 				self.air_link = False
 				self.ground_link = True				
 
 		except:
 			# @TODO: Catch specific exceptions
-			print ("Server-Ground Disconnected\r")
+			cur_time = "[" + str(time.time()) + "]"
+			print (cur_time + " Server-Ground Disconnected\r")
 			self.air_link = False
 			self.ground_link = False
 			self.netcat_link = False
