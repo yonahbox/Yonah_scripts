@@ -1,12 +1,25 @@
 #!/usr/bin/env python3
 
+# Copyright (C) 2019 Seah Shao Xuan, Lau Yan Han, and Yonah (yonahbox@gmail.com)
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 """
 File Name: ground_data.py
-Date Modified: 29/07/2019
 Required Scripts: ground_ssh_connection.sh, ground_netcat_init.sh
 
-Launched by python2.7, which performs the initialisation of a SSH connection from the ground control station (GCS) to a web server.
-
+Launched by python3, which performs the initialisation of a SSH connection from the ground control station (GCS) to a web server.
 Includes SSH connection, NETCAT initialisation and periodic tests of connection with the web server.
 """
 
@@ -72,7 +85,8 @@ class SSH:
 				self.air_link = False
 				self.ground_link = True				
 
-		except IndentationError:
+		except:
+			# @TODO: Catch specific exceptions
 			print ("Server-Ground Disconnected\r")
 			self.air_link = False
 			self.ground_link = False
