@@ -1,4 +1,26 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/env python3
+
+# Copyright (C) 2019 Seah Shao Xuan, Lau Yan Han, and Yonah (yonahbox@gmail.com)
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+'''
+socket_server.py: Forwards MAVlink data between air and ground side via web server
+This script should be placed in the web server and set to auto-start with chron
+'''
+
+# @TODO: Add more comments
 
 import time
 import socket
@@ -70,27 +92,32 @@ class aircraft:
 			self.status.append('')		
 
 
-def log_status(live_aircraft, aircraft_status):
+# def log_status(live_aircraft, aircraft_status):
+# 	'''Log status of aircraft to DL_log.txt'''
 
-	for a in live_aircraft:
+# 	for a in live_aircraft:
 
-		if ("AIR" in a.status) and (("GROUND" in a.status) or ("GROUNDNETCAT" in a.status)):	
-			aircraft_status.append([a.name, "A---S---G"])
-		elif ("AIR" in a.status) and not (("GROUND" in a.status) or ("GROUNDNETCAT" in a.status)):
-			aircraft_status.append([a.name, "A---S-x-G"])			
-		elif not ("AIR" in a.status) and (("GROUND" in a.status) or ("GROUNDNETCAT" in a.status)):
-			aircraft_status.append([a.name, "A-x-S---G"])
-		else:
-			aircraft_status.append([a.name, "A-x-S-x-G"])
+# 		if ("AIR" in a.status) and (("GROUND" in a.status) or ("GROUNDNETCAT" in a.status)):	
+# 			aircraft_status.append([a.name, "A---S---G"])
+# 		elif ("AIR" in a.status) and not (("GROUND" in a.status) or ("GROUNDNETCAT" in a.status)):
+# 			aircraft_status.append([a.name, "A---S-x-G"])			
+# 		elif not ("AIR" in a.status) and (("GROUND" in a.status) or ("GROUNDNETCAT" in a.status)):
+# 			aircraft_status.append([a.name, "A-x-S---G"])
+# 		else:
+# 			aircraft_status.append([a.name, "A-x-S-x-G"])
 
-	print (aircraft_status)
+# 	print (aircraft_status)
 
-	log_file = open("DL_log.txt", "a")
-	log_file.write("["+str(time.asctime(time.localtime()))+"] ")
-	for s in aircraft_status:
-		log_file.write("NEMO"+str(s[0])+": "+str(s[1])+", ")
-	log_file.write("\n")
-	log_file.close()
+# 	log_file = open("DL_log.txt", "a")
+# 	log_file.write("["+str(time.asctime(time.localtime()))+"] ")
+# 	for s in aircraft_status:
+# 		log_file.write("NEMO"+str(s[0])+": "+str(s[1])+", ")
+# 	log_file.write("\n")
+# 	log_file.close()
+
+####################
+# "Main" function
+####################
 
 live_aircraft = []
 
@@ -117,6 +144,4 @@ while True:
 	for a in aircraft_processes:
 		a.terminate()
 	
-	log_status(live_aircraft, aircraft_status)
-	
-
+	# log_status(live_aircraft, aircraft_status)
