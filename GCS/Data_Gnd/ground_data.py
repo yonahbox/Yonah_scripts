@@ -34,7 +34,7 @@ class SSH:
 	#Attempts one SSH connection. Waits for 5 seconds before any tests to allow OpenSSH to thoroughly finish the connection process
 	def ssh_attempt_connection(self):	
 		
-		print "Attempting connection...\r\n"	
+		print ("Attempting connection...\r\n")
 
 		port_1 = (10 * int(sys.argv[1])) + 4000
 		port_2 = port_1 + 1
@@ -56,24 +56,24 @@ class SSH:
 			self.client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 			self.client.connect(('localhost', 4001))
 			if self.netcat_link == True:			
-				self.client.send("GROUNDNETCAT")
+				self.client.send("GROUNDNETCAT".encode())
 			else:
-				self.client.send("GROUND")
+				self.client.send("GROUND".encode())
 			#Send the Ground NETCAT Status
 			self.from_server = self.client.recv(4096)
 			self.client.close()
 	
-			if ("GROUND" in self.from_server) and ("AIR" in self.from_server):	
-				print "Air-Server-Ground Established\r"	
+			if ("GROUND".encode() in self.from_server) and ("AIR".encode() in self.from_server):	
+				print ("Air-Server-Ground Established\r")
 				self.air_link = True
 				self.ground_link = True	
-			elif ("GROUND" in self.from_server) and not ("AIR" in self.from_server):
-				print "Server-Ground Established, Air-Server Connection Down, Please Reconnect\r"
+			elif ("GROUND".encode() in self.from_server) and not ("AIR".encode() in self.from_server):
+				print ("Server-Ground Established, Air-Server Connection Down, Please Reconnect\r")
 				self.air_link = False
 				self.ground_link = True				
 
-		except:
-			print "Server-Ground Disconnected\r"
+		except IndentationError:
+			print ("Server-Ground Disconnected\r")
 			self.air_link = False
 			self.ground_link = False
 			self.netcat_link = False
@@ -87,13 +87,13 @@ class SSH:
 
 		#Kills any existing NETCAT processes prior to opening a new one, to prevent the hogging of critical ports	
 		self.netcat_list = subprocess.Popen(['pidof', 'netcat'], stdout=PIPE).stdout.read()
-		self.arg = 'kill -9 ' + self.netcat_list
+		self.arg = 'kill -9 ' + self.netcat_list.decode()
 		#Usage of python subprocessing to open a NETCAT process
 		subprocess.Popen([self.arg], shell=True, stdout=PIPE, stderr=PIPE)
-		print "NETCAT Reset\r"		
+		print ("NETCAT Reset\r")
 		self.netcat_linkage = subprocess.Popen(['bash $(find -name *ground_netcat_init.sh)'], shell=True, stdout=PIPE)
 		self.netcat_link = True
-		print "NETCAT Initialised\r"	
+		print ("NETCAT Initialised\r")
 
 	def ssh_terminate(self):
 	
@@ -126,6 +126,6 @@ if __name__ == "__main__":
 
 	except KeyboardInterrupt:
 		ssh.ssh_terminate()
-		print "Terminating program...\r"
+		print ("Terminating program...\r")
 
 
