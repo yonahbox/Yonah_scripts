@@ -26,4 +26,5 @@ For instructions on operating the rest of the Data Telemetry (Tech) system, refe
 
 ## SBD Link (Ops)
 
-@TODO
+* **sbd_from_server.py**: Receive Iridium Short-Burst-Data (SBD) messages from Rock Seven server
+* **sbd_to_gcs.py**: Forward Iridium Short-Burst-Data (SBD) messages to Ground Control
