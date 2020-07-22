@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# Copyright (C) 2019 Seah Shao Xuan, Lau Yan Han, and Yonah (yonahbox@gmail.com)
+# Copyright (C) 2019, 2020 Seah Shao Xuan, Lau Yan Han, and Yonah (yonahbox@gmail.com)
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -23,7 +23,6 @@ Launched by python3, which performs the initialisation of a SSH connection from 
 Includes SSH connection, NETCAT initialisation and periodic tests of connection with the web server.
 """
 
-#Imports critical python modules
 import time
 import socket
 import subprocess
