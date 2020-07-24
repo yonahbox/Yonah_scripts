@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# Copyright (C) 2019 Seah Shao Xuan, Lau Yan Han, and Yonah (yonahbox@gmail.com)
+# Copyright (C) 2019, 2020 Seah Shao Xuan, Lau Yan Han, and Yonah (yonahbox@gmail.com)
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -53,15 +53,15 @@ class aircraft:
 		
 		self.s_air.listen(1)	
 		self.air_conn, self.air_addr = self.s_air.accept()
-		self.air_ack.put(self.air_conn.recv(4096))
-		self.air_conn.send(str(self.status))
+		self.air_ack.put(self.air_conn.recv(4096).decode())
+		self.air_conn.send(str(self.status).encode())
 
 	def ground_sock_ping(self):
 
 		self.s_ground.listen(1)		
 		self.ground_conn, self.ground_addr = self.s_ground.accept()
-		self.ground_ack.put(self.ground_conn.recv(4096))
-		self.ground_conn.send(str(self.status))
+		self.ground_ack.put(self.ground_conn.recv(4096).decode())
+		self.ground_conn.send(str(self.status).encode())
 
 	def per_second(self):		
 
