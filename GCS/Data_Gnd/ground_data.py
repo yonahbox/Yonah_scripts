@@ -72,16 +72,16 @@ class SSH:
 			else:
 				self.client.send("GROUND".encode())
 			#Send the Ground NETCAT Status
-			self.from_server = self.client.recv(4096)
+			self.from_server = self.client.recv(4096).decode()
 			self.client.close()
 
 			cur_time = "[" + str(time.time()) + "]"
 	
-			if ("GROUND".encode() in self.from_server) and ("AIR".encode() in self.from_server):	
+			if ("GROUND" in self.from_server) and ("AIR" in self.from_server):	
 				print (cur_time + " Air-Server-Ground Established\r")
 				self.air_link = True
 				self.ground_link = True	
-			elif ("GROUND".encode() in self.from_server) and not ("AIR".encode() in self.from_server):
+			elif ("GROUND" in self.from_server) and not ("AIR" in self.from_server):
 				print (cur_time + " Server-Ground Established, Air-Server Connection Down, Please Reconnect\r")
 				self.air_link = False
 				self.ground_link = True				
