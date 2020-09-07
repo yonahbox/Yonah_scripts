@@ -1,0 +1,13 @@
+[Unit]
+Description=Start a new tmux session and run roslaunch to simplyify NEMO startup
+After=network-online.target
+Requires=network-online.target
+
+[Service]
+Type=forking
+User=ubuntu
+ExecStart=/usr/local/bin/ros_boot_start
+ExecStop=/usr/local/bin/ros_boot_stop
+
+[Install]
+WantedBy=multi-user.target
