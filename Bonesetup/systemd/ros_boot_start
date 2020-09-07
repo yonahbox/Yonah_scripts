@@ -1,0 +1,5 @@
+#!/bin/bash
+
+tmux new -d -s roslaunch_session
+tmux send-keys -t roslaunch_session "roslaunch ~/Yonah_ROS_packages/launch/air.launch" C-m
+tmux detach -s roslaunch_session
