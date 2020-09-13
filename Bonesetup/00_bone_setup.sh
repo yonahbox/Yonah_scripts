@@ -27,6 +27,8 @@ if $CLONEMODE
 then
 	ssh-keygen -t rsa -N ""
 	ssh-keygen -p -m PEM =f ~/.ssh/id_rsa
+else
+	sudo apt install vim nano wget bash-completion tcpdump
 fi
 
 # Step 1: update system and install essential packages
