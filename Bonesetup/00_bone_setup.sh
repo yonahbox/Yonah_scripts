@@ -28,6 +28,8 @@ then
 	ssh-keygen -t rsa -N ""
 	ssh-keygen -p -m PEM =f ~/.ssh/id_rsa
 else
+	# Install common common packages
+	# These are already installed in the clone method
 	sudo apt install vim nano wget bash-completion tcpdump
 fi
 
@@ -38,6 +40,7 @@ bash 01_install_packages.sh
 git clone https://github.com/yonahbox/Yonah_ROS_packages.git ~/Yonah_ROS_packages
 
 bash 02_setup_ros_ws.sh bonedata_ws bonesms_ws ogc_ws
+source ~/.bashrc
 
 # Step 3: install systemd service
 bash 03_systemd_setup.sh

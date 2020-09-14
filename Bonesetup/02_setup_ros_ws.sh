@@ -12,14 +12,14 @@ origin=$(pwd)
 for ws in "$@"
 do
 	# Ensure the directory exists
-	if [ ! -d  ~/Yonah_ROS_packages/$1 ]
+	if [ ! -d  ~/Yonah_ROS_packages/$ws ]
 	then
 		echo "Workspace not found, exiting"
 	else
-		cd ~/Yonah_ROS_packages/$1
+		cd ~/Yonah_ROS_packages/$ws
 		catkin_make -DCATKIN_BLACKLIST_PACKAGES="rqt_mypkg"
-		echo "source ~/Yonah_ROS_packages/$1/devel/setup.bash" >> ~/.bashrc
-		source ~/Yonah_ROS_packages/$1/devel/setup.bash
+		echo "source ~/Yonah_ROS_packages/$ws/devel/setup.bash" >> ~/.bashrc
+		source ~/Yonah_ROS_packages/$ws/devel/setup.bash
 	fi
 done
 
