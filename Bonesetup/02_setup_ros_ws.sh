@@ -18,7 +18,7 @@ do
 	else
 		cd ~/Yonah_ROS_packages/$ws
 		catkin_make -DCATKIN_BLACKLIST_PACKAGES="rqt_mypkg"
-		echo "source ~/Yonah_ROS_packages/$ws/devel/setup.bash" >> ~/.bashrc
+		echo "source ~/Yonah_ROS_packages/$ws/devel/setup.bash" >> ~/.ros_bashrc
 		source ~/Yonah_ROS_packages/$ws/devel/setup.bash
 	fi
 done

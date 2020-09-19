@@ -23,25 +23,28 @@ echo "Congratulations on your new install, Please wait while the system is being
 echo "You may be asked to enter the password several times in this process"
 
 # Create new SSH Keys and convert them to a type that can be used by paramiko
-if $CLONEMODE
+ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa
+ssh-keygen -p -m PEM -N "" -f ~/.ssh/id_rsa
+
+if ! $CLONEMODE
 then
-	ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa
-	ssh-keygen -p -m PEM -N "" -f ~/.ssh/id_rsa
-else
 	# Install common common packages
 	# These are already installed in the clone method
 	sudo apt install vim nano wget bash-completion tcpdump
 fi
 
+# source ~/.ros_bashrc file from ~/.bashrc
+echo "source ~/.ros_bashrc" >> ~/.bashrc
+
 # Step 1: update system and install essential packages
 bash 01_install_packages.sh
-source ~/.bashrc
+source ~/.ros_bashrc
 
 # Step 2: setup yonahs ROS packages
 git clone https://github.com/yonahbox/Yonah_ROS_packages.git ~/Yonah_ROS_packages
 
 bash 02_setup_ros_ws.sh bonedata_ws bonesms_ws ogc_ws
-source ~/.bashrc
+source ~/.ros_bashrc
 
 # Step 3: install systemd service
 bash 03_systemd_setup.sh

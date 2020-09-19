@@ -24,7 +24,7 @@ rosdep update
 # Note that a "source" command after compiling each ROS pacakge is neccessary, so that
 # the next ROS node can be overlaid over the previous one
 
-echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
+echo "source /opt/ros/noetic/setup.bash" >> ~/.ros_bashrc
 source /opt/ros/noetic/setup.bash
 
 # Install and configure MAVROS
