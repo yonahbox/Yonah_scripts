@@ -14,7 +14,7 @@ sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31
 
 # Install ROS packages
 sudo apt update
-sudo apt install ros-noetic-ros-base python3-rosdep =y
+sudo apt install ros-noetic-ros-base python3-rosdep -y
 
 # Configure rosdep
 sudo rosdep init
