@@ -25,8 +25,8 @@ echo "You may be asked to enter the password several times in this process"
 # Create new SSH Keys and convert them to a type that can be used by paramiko
 if $CLONEMODE
 then
-	ssh-keygen -t rsa -N ""
-	ssh-keygen -p -m PEM =f ~/.ssh/id_rsa
+	ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa
+	ssh-keygen -p -m PEM -N "" -f ~/.ssh/id_rsa
 else
 	# Install common common packages
 	# These are already installed in the clone method
@@ -35,6 +35,7 @@ fi
 
 # Step 1: update system and install essential packages
 bash 01_install_packages.sh
+source ~/.bashrc
 
 # Step 2: setup yonahs ROS packages
 git clone https://github.com/yonahbox/Yonah_ROS_packages.git ~/Yonah_ROS_packages
