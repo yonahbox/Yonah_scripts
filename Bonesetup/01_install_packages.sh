@@ -4,7 +4,7 @@
 
 # Upgrade existing packages
 sudo apt update
-sudo apt upgrade
+sudo apt upgrade -y
 
 # Install ROS
 
@@ -14,7 +14,7 @@ sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31
 
 # Install ROS packages
 sudo apt update
-sudo apt install ros-noetic-ros-base python3-rosdep
+sudo apt install ros-noetic-ros-base python3-rosdep =y
 
 # Configure rosdep
 sudo rosdep init
@@ -28,13 +28,13 @@ echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
 source /opt/ros/noetic/setup.bash
 
 # Install and configure MAVROS
-sudo apt install ros-noetic-mavros ros-noetic-mavros-extras
+sudo apt install ros-noetic-mavros ros-noetic-mavros-extras -y
 wget https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/install_geographiclib_datasets.sh
 chmod a+x install_geographiclib_datasets.sh
 bash install_geographiclib_datasets.sh
 
 # Install remaining packages required for OGC
-sudo apt install python3-pip python3-yaml htop tmux nmap screen python3-paramiko
+sudo apt install python3-pip python3-yaml htop tmux nmap screen python3-paramiko -y
 
 # Install pip modules
 pip3 install --user rospkg catkin_pkg defusedxml netifaces pyserial
