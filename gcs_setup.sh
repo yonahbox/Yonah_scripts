@@ -20,10 +20,10 @@ bash common/setup_ros_ws.sh -g bonedata_ws bonesms_ws ogc_ws
 source ~/.ros_bashrc
 
 echo "Installing telegram"
-bash common/telegram_build.sh
+bash common/telegram_build.sh -g
 
 echo "The setup is almost complete! the only thing left is telegram"
 echo "You will need access to another device running telegram with the account you want to add"
-./telegram/tele_auth
+./telegra/tele_auth
 
 echo "Setup complete, restart the system to continue"

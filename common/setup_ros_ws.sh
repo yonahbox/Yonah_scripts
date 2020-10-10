@@ -36,6 +36,8 @@ do
 		if $BONE
 		then
 			catkin_make -DCATKIN_BLACKLIST_PACKAGES="rqt_mypkg"
+		else
+			catkin_make
 		fi
 		
 		echo "source ~/Yonah_ROS_packages/$ws/devel/setup.bash" >> ~/.ros_bashrc

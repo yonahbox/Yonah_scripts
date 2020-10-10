@@ -9,7 +9,7 @@ do
 			ROS_TYPE=ros-noetic-ros-base
 			;;
 		g)
-			ROS_TYPE=ros-noetic-ros-desktop
+			ROS_TYPE=ros-noetic-desktop
 			;;
 	esac
 done

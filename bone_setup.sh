@@ -52,7 +52,7 @@ bash common/systemd_setup.sh
 # Step 4: setup telegram account
 if ! $CLONEMODE
 then
-	bash common/telegram_build.sh
+	bash common/telegram_build.sh -b
 fi
 
 echo "The setup is almost complete! the only thing left is telegram"
