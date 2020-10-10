@@ -21,11 +21,11 @@ done
 # uncomment the below line if running the script standalone
 # sudo apt-get update
 
-sudo apt install make git zlib1g-dev libssl-dev gperf php cmake clang libc++-dev
+sudo apt install make git zlib1g-dev libssl-dev gperf php cmake clang libc++-dev -y
 
 if ! $BONE
 then
-	sudo apt install libc++abi-dev
+	sudo apt install libc++abi-dev -y
 fi
 
 # Clone TDLib repo, placing in repo/ to avoid cluttering home
