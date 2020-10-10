@@ -13,6 +13,7 @@ do
 			;;
 	esac
 done
+shift $((OPTIND -1))
 
 
 # Initialize ROS workspace from Yonahs git repository
