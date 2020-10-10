@@ -23,7 +23,7 @@ done
 
 sudo apt install make git zlib1g-dev libssl-dev gperf php cmake clang libc++-dev
 
-if [[ ! $BONE ]]
+if ! $BONE
 then
 	sudo apt install libc++abi-dev
 fi
