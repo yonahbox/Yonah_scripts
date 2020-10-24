@@ -51,7 +51,7 @@ source /opt/ros/noetic/setup.bash
 sudo apt install ros-noetic-mavros ros-noetic-mavros-extras -y
 wget https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/install_geographiclib_datasets.sh
 chmod a+x install_geographiclib_datasets.sh
-bash install_geographiclib_datasets.sh
+sudo bash install_geographiclib_datasets.sh
 
 # Install remaining packages required for OGC
 sudo apt install python3-pip python3-yaml htop tmux nmap screen python3-paramiko -y
