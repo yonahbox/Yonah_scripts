@@ -9,7 +9,7 @@ from pathlib import Path
 import time
 
 home_dir = str(Path.home())
-tdlib_dir = home_dir + '/.tdlib_test'
+tdlib_dir = home_dir + '/.tdlib'
 self_id_file = home_dir + '/.self_id'
 
 class Td():
