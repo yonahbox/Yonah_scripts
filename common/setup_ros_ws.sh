@@ -36,7 +36,7 @@ do
 
 		if $BONE
 		then
-			catkin_make -DCATKIN_BLACKLIST_PACKAGES="rqt_mypkg"
+			catkin_make -DCATKIN_BLACKLIST_PACKAGES="yonah_rqt"
 		else
 			catkin_make
 		fi
