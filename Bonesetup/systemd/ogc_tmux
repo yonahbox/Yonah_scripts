@@ -1,0 +1,7 @@
+#!/bin/bash
+
+source /opt/ros/noetic/setup.bash
+source /home/ubuntu/Yonah_ROS_packages/ogc_ws/devel/setup.bash
+/home/ubuntu/Yonah_ROS_packages/ogc_ws/src/telegram/src/telegram_bone
+
+roslaunch telegram telegram_air.launch
