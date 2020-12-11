@@ -28,9 +28,14 @@ sudo apt upgrade -y
 
 # Install ROS
 
-# Add the repo and add the keys
+# Add the repos and keys
+# ROS 
 sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
 sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
+
+# Syncthing
+echo "deb https://apt.syncthing.net/ syncthing stable" | sudo tee /etc/apt/sources.list.d/syncthing.list
+curl -s https://syncthing.net/release-key.txt | sudo apt-key add -
 
 # Install ROS packages
 sudo apt update
@@ -54,7 +59,7 @@ chmod a+x install_geographiclib_datasets.sh
 sudo bash install_geographiclib_datasets.sh
 
 # Install remaining packages required for OGC
-sudo apt install python3-pip python3-yaml htop tmux nmap screen python3-paramiko -y
+sudo apt install python3-pip python3-yaml htop tmux nmap screen python3-paramiko syncthing -y
 
 # Install pip modules
 pip3 install --user rospkg catkin_pkg defusedxml netifaces pyserial
