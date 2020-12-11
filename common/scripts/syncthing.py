@@ -2,6 +2,7 @@
 
 from pathlib import Path
 import xml.etree.ElementTree as xml
+import requests as req
 
 class Syncthing:
 	def __init__(self):
