@@ -6,6 +6,9 @@ echo "Preparing to install"
 ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa
 ssh-keygen -p -m PEM -N "" -f ~/.ssh/id_rsa
 
+# add user to dialout group for SBD serial to work
+sudo usermod -a -G $(whoami)
+
 # source ~/.ros_bashrc file from ~/.bashrc
 echo "source ~/.ros_bashrc" >> ~/.bashrc
 
