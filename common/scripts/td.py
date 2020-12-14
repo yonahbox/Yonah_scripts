@@ -58,6 +58,20 @@ class Td():
 		query = json.dumps(query).encode('utf-8')
 		self._client_send(self.client, query)
 
+	def send_message(self, telegram_id, msg):
+		self.send({
+			'@type': 'sendMessage',
+			'chat_id': telegram_id,
+			'input_message_content': {
+				'@type': 'inputMessageText',
+				'text': {
+					'@type': 'formattedText',
+					'text': msg,
+				}
+			},
+			'@extra': 'sent from Td.py'
+		})
+
 	def receive(self):
 		result_orig = self._client_receive(self.client, 1.0)
 		if result_orig:
