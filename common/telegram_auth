@@ -12,7 +12,7 @@ from scripts.td import Td
 from scripts.syncthing import Syncthing
 
 home_dir = str(Path.home())
-tdlib_dir = home_dir + '/.tdlib_test3'
+tdlib_dir = home_dir + '/.tdlib'
 self_id_file = home_dir + '/.self_id'
 
 if __name__ == '__main__':

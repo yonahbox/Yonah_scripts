@@ -24,6 +24,14 @@ class Syncthing:
 		for elem in root.iter('apikey'):
 			self.api_key = elem.text
 
+	def get_id(self):
+		try:
+			sub_call = subprocess.run(['syncthing', '-device-id'], capture_output=True, text=True)
+			return sub_call.stdout.rstrip()
+		except FileNotFoundError:
+			print("Unable to call syncthing, please check if it is installer")
+
+
 	def _post(self, url, data):
 		try:
 			req.post(self.host + url, headers= {
