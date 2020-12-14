@@ -12,7 +12,7 @@ from scripts.td import Td
 from scripts.syncthing import Syncthing
 
 home_dir = str(Path.home())
-tdlib_dir = home_dir + '/.tdlib'
+tdlib_dir = home_dir + '/.tdlib_test3'
 self_id_file = home_dir + '/.self_id'
 
 if __name__ == '__main__':
@@ -87,6 +87,7 @@ if __name__ == '__main__':
 					print('telegram client setup complete')
 					admin_number = input('please enter the phone number of the admin account (with country code, eg: 6512345678): ')
 					td.add_contact(admin_number, "admin")
+					time.sleep(1)
 					td.get_contacts()
 					print('waiting for device_id from admin account')
 
@@ -109,6 +110,13 @@ if __name__ == '__main__':
 								f.write(f"{msg['device_id']}\n")
 
 							st.add_device(msg['admin_syncthing_id'], "admin")
+							msg = {
+								"request": "add_syncthing",
+								"is_air": msg["is_air"],
+								"device_id": msg["device_id"]
+								"syncthing_id": st.get_id()
+							}
+							td.send_message(admin_id, json.dumps(msg))
 
 							print("Setup complete!")
 							exit()

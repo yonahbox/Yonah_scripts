@@ -3,10 +3,11 @@
 from pathlib import Path
 import xml.etree.ElementTree as xml
 import requests as req
+import json
 
 class Syncthing:
 	def __init__(self):
-		self._host = "http://localhost:8384"
+		self.host = "http://localhost:8384"
 
 		self.parse_config()
 
