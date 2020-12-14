@@ -113,7 +113,7 @@ if __name__ == '__main__':
 							msg = {
 								"request": "add_syncthing",
 								"is_air": msg["is_air"],
-								"device_id": msg["device_id"]
+								"device_id": msg["device_id"],
 								"syncthing_id": st.get_id()
 							}
 							td.send_message(admin_id, json.dumps(msg))
