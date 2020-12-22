@@ -1,0 +1,13 @@
+#!/bin/bash
+
+tmux new -d -s admin
+
+#tmux send-keys -t admin "export OGC=$HOME/Yonah_ROS_packages/ogc/src" C-m
+#tmux send-keys -t admin "export PYTHONPATH=$PYTHONPATH:$OGC/telegram/scripts:$OGC/identifiers/scripts:$OGC/file_sync/scripts" C-m
+
+#tmux send-keys -t admin "/usr/local/bin/telegram_admin" C-m
+tmux send-keys -t admin "/usr/local/bin/ogc_tmux" C-m
+
+tmux detach -s admin
+
+exit 0
