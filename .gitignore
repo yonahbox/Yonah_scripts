@@ -23,3 +23,4 @@ router_phone_numbers.txt
 YonahAWSPrivateKey-2Jul19
 
 **/__pycache__
+*.pyc
