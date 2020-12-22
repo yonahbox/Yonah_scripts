@@ -47,7 +47,11 @@ bash common/setup_ros_ws.sh -b bonedata_ws bonesms_ws ogc_ws
 source ~/.ros_bashrc
 
 # Step 3: install systemd service
-bash common/systemd_setup.sh
+cd common
+bash systemd_setup.sh
+cd ..
+sleep 5
+
 
 # Step 4: setup telegram account
 if ! $CLONEMODE

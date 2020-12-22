@@ -63,4 +63,4 @@ sudo bash install_geographiclib_datasets.sh
 sudo apt install python3-pip python3-yaml htop tmux nmap screen python3-paramiko syncthing -y
 
 # Install pip modules
-pip3 install --user rospkg catkin_pkg defusedxml netifaces pyserial inotify
+pip3 install --user rospkg catkin_pkg defusedxml netifaces pyserial inotify requests
