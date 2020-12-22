@@ -27,6 +27,6 @@ bash common/telegram_build.sh -g
 
 echo "The setup is almost complete! the only thing left is telegram"
 echo "You will need access to another device running telegram with the account you want to add"
-./common/telegram_auth
+./common/device_auth
 
 echo "Setup complete, restart the system to continue"

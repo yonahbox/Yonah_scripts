@@ -11,4 +11,5 @@ cd Yonah_scripts
 git checkout clone
 
 # run the main installation script
+cd setup
 ./bone_setup.sh -c
