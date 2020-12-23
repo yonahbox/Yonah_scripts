@@ -1,0 +1,125 @@
+#!/usr/bin/env python3
+
+## to be run as part of Yonah_Scripts bonesetup
+
+import os
+from ctypes import *
+import json
+from pathlib import Path
+import time
+
+from scripts.td import Td
+from scripts.syncthing import Syncthing
+
+home_dir = str(Path.home())
+tdlib_dir = home_dir + '/.tdlib'
+self_id_file = home_dir + '/.self_id'
+
+if __name__ == '__main__':
+	if os.path.isdir(tdlib_dir):
+		print('An instance of telegram already exists in this directory')
+		print('Please delete that instance if you wish to create a new one')
+		print('exiting...')
+		exit()
+	
+	td = Td(tdlib_dir)
+	td.send({'@type': 'getAuthorizationState'})
+
+	st = Syncthing()
+
+	boot_time = time.time()
+	admin_number = ""
+	admin_id = 0
+
+	while True:
+		event = td.receive()
+		if event:
+			if event['@type'] == 'updateAuthorizationState':
+				auth_state = event['authorization_state']['@type']
+
+				if auth_state == 'authorizationStateClosed':
+					break
+
+				if auth_state == 'authorizationStateWaitTdlibParameters':
+					td.send({
+						'@type': 'setTdlibParameters',
+						'parameters': {
+							'database_directory': tdlib_dir,
+							'use_message_database': True,
+							'use_secret_chats': True,
+							'api_id': 1111226,
+							'api_hash': '9996b83ac27902d79ce9486e6f740a08',
+							'system_language_code': 'en',
+							'device_model': 'Desktop',
+							'system_version': 'Linux',
+							'application_version': '1.0',
+							'enable_storage_optimizer': True
+						}
+					})
+
+				if auth_state == 'authorizationStateWaitEncryptionKey':
+					td.send({
+						'@type': 'checkDatabaseEncryptionKey', 
+						'key': 'my_key'
+					})
+
+				if auth_state == 'authorizationStateWaitPhoneNumber':
+					phone_number = input('Please enter your phone number (with country code, eg: 6512345678): ')
+					td.send({
+						'@type': 'setAuthenticationPhoneNumber', 
+						'phone_number': phone_number
+					})
+
+				if auth_state == 'authorizationStateWaitCode':
+					code = input('Please enter the authentication code you received: ')
+					td.send({
+						'@type': 'checkAuthenticationCode', 
+						'code': code
+					})
+
+				if auth_state == 'authorizationStateWaitPassword':
+					password = input('Please enter your password')
+					td.send({
+						'@type': 'checkAuthenticationPassword', 
+						'password': password
+					})
+				if auth_state == 'authorizationStateReady':
+					print('telegram client setup complete')
+					admin_number = input('please enter the phone number of the admin account (with country code, eg: 6512345678): ')
+					td.add_contact(admin_number, "admin")
+					time.sleep(1)
+					td.get_contacts()
+					print('waiting for device_id from admin account')
+
+			elif event['@type'] == 'user':
+				if event['phone_number'] == admin_number:
+					admin_id = event['id']
+					print("Received admin_id")
+
+			if event['@type'] == 'updateNewMessage':
+				if event['message']['is_outgoing'] or event['message']['date'] < boot_time:
+					continue
+
+				print(f"{admin_id} {event['message']['sender_user_id']}")
+				if event['message']['sender_user_id'] == admin_id:
+					print("received message from admin")
+					try:
+						msg = json.loads(event['message']['content']['text']['text'])
+						if msg['request'] == 'init_device':
+							with open(self_id_file, 'w') as f:
+								f.write(f"{msg['device_id']}\n")
+
+							st.add_device(msg['admin_syncthing_id'], "admin")
+							msg = {
+								"request": "add_syncthing",
+								"is_air": msg["is_air"],
+								"device_id": msg["device_id"],
+								"syncthing_id": st.get_id()
+							}
+							td.send_message(admin_id, json.dumps(msg))
+
+							print("Setup complete!")
+							exit()
+					except json.JSONDecodeError:
+						print("invalid message format")
+						continue

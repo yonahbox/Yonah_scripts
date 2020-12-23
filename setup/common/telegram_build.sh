@@ -3,12 +3,30 @@
 # Script to build TDLib
 # based on instructions provided at https://tdlib.github.io/td/build.html?language=Python
 
+BONE=false
+while getopts 'bg' flag
+do
+	case "${flag}" in
+		b)
+			BONE=true
+			;;
+		g)
+			BONE=false
+			;;
+	esac
+done
+
 # Install dependancies
 
 # uncomment the below line if running the script standalone
 # sudo apt-get update
 
-sudo apt-get install make git zlib1g-dev libssl-dev gperf php cmake clang libc++-dev
+sudo apt install make git zlib1g-dev libssl-dev gperf php cmake clang libc++-dev -y
+
+if ! $BONE
+then
+	sudo apt install libc++abi-dev -y
+fi
 
 # Clone TDLib repo, placing in repo/ to avoid cluttering home
 cd ~
@@ -25,13 +43,19 @@ mkdir build
 cd build
 export CXXFLAGS="-stdlib=libc++"
 CC=/usr/bin/clang CXX=/usr/bin/clang++ cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr/local ..
-cmake --build . --target prepare_cross_compiling
 
-cd ..
-php SplitSource.php
+if [[ $BONE ]]
+then
+	cmake --build . --target prepare_cross_compiling
+	cd ..
+	php SplitSource.php
+	cd build
+fi
 
-cd build
 sudo cmake --build . --target install
 
-cd ..
-php SplitSource.php --undo
+if [[ $BONE ]]
+then
+	cd ..
+	php SplitSource.php --undo
+fi

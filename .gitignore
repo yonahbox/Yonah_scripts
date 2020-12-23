@@ -21,3 +21,6 @@ router_phone_numbers.txt
 #SSH Private Key Files
 *.pem
 YonahAWSPrivateKey-2Jul19
+
+**/__pycache__
+*.pyc

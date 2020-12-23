@@ -1,0 +1,10 @@
+#!/bin/bash
+
+export OGC=/home/ubuntu/Yonah_ROS_packages/ogc_ws/src 
+
+export PYTHONPATH=$PYTHONPATH:$OGC/telegram/scripts:$OGC/identifiers/scripts:$OGC/file_sync/scripts 
+
+echo $OGC
+echo $PYTHONPATH
+
+ogc_admin 

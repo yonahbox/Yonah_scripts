@@ -1,0 +1,11 @@
+#!/bin/bash
+
+source /opt/ros/noetic/setup.bash
+source /home/ubuntu/Yonah_ROS_packages/ogc_ws/devel/setup.bash
+
+ROS_DIR=~/Yonah_ROS_packages
+
+$ROS_DIR/ogc_ws/src/telegram/src/telegram_bone
+
+cd $ROS_DIR/launch
+roslaunch ogc_airtest.launch
