@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Set up ogc systemd service on the aircraft, so that ogc can autostart when aircraft boots up
+
 chmod +x systemd/ogc_systemd
 chmod +x systemd/ogc_tmux
 
