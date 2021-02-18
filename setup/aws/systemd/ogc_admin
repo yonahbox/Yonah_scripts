@@ -1,5 +1,12 @@
 #!/usr/bin/env python3
 
+'''
+Main python script that will always run on the server. 
+This script takes in valid_id list from a ground station and notify all aircraft in the list to launch OGC. 
+Also allows the server to add new devices to the OGC syncthing network and assign them their IDs. 
+This file should be in `/usr/local/bin`
+'''
+
 # Copyright (C) 2020 Rumesh Sudhaharan
 
 # This program is free software: you can redistribute it and/or modify

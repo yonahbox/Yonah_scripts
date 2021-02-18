@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Export python paths and launch the ogc_admin script on the server. This file should be in /usr/local/bin
+
 export OGC=/home/ubuntu/Yonah_ROS_packages/ogc_ws/src 
 
 export PYTHONPATH=$PYTHONPATH:$OGC/telegram/scripts:$OGC/identifiers/scripts:$OGC/file_sync/scripts 
