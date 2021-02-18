@@ -10,4 +10,3 @@ sudo systemctl enable ogc.service
 
 # start and enable syncthing 
 sudo systemctl enable --now syncthing@$(whoami)
-# sudo systemctl start syncthing@$(whoami)
