@@ -92,6 +92,7 @@ class aircraft:
 			self.status.append('')		
 
 
+# Commented out this code as the logging creates excessively large files
 # def log_status(live_aircraft, aircraft_status):
 # 	'''Log status of aircraft to DL_log.txt'''
 

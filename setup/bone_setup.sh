@@ -62,6 +62,7 @@ fi
 echo "The setup is almost complete! the only thing left is telegram"
 echo "You will need access to another device running telegram with the account you want to add"
 ./common/device_auth
+touch ~/.valid_ids
 
 echo "Setup complete, restart the system to continue"
 echo "If the systemd service should be enabled, run \"sudo systemctl enable ros_boot.service\""

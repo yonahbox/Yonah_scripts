@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Set up ogc systemd service on the aircraft, so that ogc can autostart when aircraft boots up
+
 chmod +x systemd/ogc_systemd
 chmod +x systemd/ogc_tmux
 
@@ -10,4 +12,3 @@ sudo systemctl enable ogc.service
 
 # start and enable syncthing 
 sudo systemctl enable --now syncthing@$(whoami)
-# sudo systemctl start syncthing@$(whoami)
